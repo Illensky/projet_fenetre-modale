@@ -1,32 +1,22 @@
-class ModalWindow {
-
-
-    /**
-     * Modal Window object creation
-     * @constructor
-     * @param btnId
-     * @param bgColorBgDiv
-     * @param popUpHeight
-     * @param popUpWidth
-     * @param bgColorPopUp
-     * @param inputsNameTypeInArray
-     */
-
-    constructor(btnId = "modalBtn", bgColorBgDiv = "rgb(0, 0, 0, 0.5)", popUpHeight = "250px", popUpWidth = "500px", bgColorPopUp = "#fff", inputsNameTypeInArray) {
-        this.btnId = btnId;
-        this.bgColorBgDiv = bgColorBgDiv;
-        this.popUpHeight = popUpHeight;
-        this.popUpWidth = popUpWidth;
-        this.bgColorPopUp = bgColorPopUp;
-        this.inputsNameTypeInArray = inputsNameTypeInArray;
-    }
+/**
+ * Modal Window object creation
+ * @constructor
+ * @param btnId
+ * @param bgColorBgDiv
+ * @param popUpHeight
+ * @param popUpWidth
+ * @param bgColorPopUp
+ * @param inputsNameTypeInArray
+ */
+const ModalWindow = function (btnId = "modalBtn", bgColorBgDiv = "rgb(0, 0, 0, 0.5)", popUpHeight = "250px",
+                              popUpWidth = "500px", bgColorPopUp = "#fff", inputsNameTypeInArray = [["Username", "text"], ["Password", "password"]]) {
 
 
     /**
      * @method Draw (used in the initialize method to set and draw te windows properties)
      */
-    draw() {
-        console.log(this.inputsNameTypeInArray)
+
+    this.draw = function () {
         const popUpBgDiv = document.createElement("div");
         popUpBgDiv.style.width = "100%";
         popUpBgDiv.style.height = "100%";
@@ -35,18 +25,18 @@ class ModalWindow {
         popUpBgDiv.style.display = "flex";
         popUpBgDiv.style.justifyContent = "center";
         popUpBgDiv.style.alignItems = "center";
-        popUpBgDiv.style.backgroundColor = this.bgColorBgDiv;
+        popUpBgDiv.style.backgroundColor = bgColorBgDiv;
 
         const popUpContent = document.createElement("div");
-        popUpContent.style.height = this.popUpHeight
-        popUpContent.style.width = this.popUpWidth
-        popUpContent.style.backgroundColor = this.bgColorPopUp
+        popUpContent.style.height = popUpHeight
+        popUpContent.style.width = popUpWidth
+        popUpContent.style.backgroundColor = bgColorPopUp
         popUpContent.style.padding = "20px"
         popUpContent.style.borderRadius = "5px"
         popUpContent.style.position = "relative"
         popUpContent.style.textAlign = "center"
 
-        for (let input of this.inputsNameTypeInArray) {
+        for (let input of inputsNameTypeInArray) {
             const champ = document.createElement("input");
             champ.type = input[1];
             champ.placeholder = input[0];
@@ -106,16 +96,18 @@ class ModalWindow {
     /**
      * @method initialize (Set the eventListener on the asked button)
      */
-    initialize() {
-        document.getElementById(this.btnId).addEventListener("click", this.draw)
+
+    this.initialize = function () {
+        document.getElementById(btnId).addEventListener("click", this.draw)
     }
 
 
     /**
      * @method deactive (Remove the eventListener of the asked button)
      */
-    deactive() {
-        document.getElementById(this.btnId).removeEventListener("click", this.draw)
+
+    this.deactive = function () {
+        document.getElementById(btnId).removeEventListener("click", this.draw)
     }
 
 }
